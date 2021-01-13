@@ -2,4 +2,3 @@ pre-commit
 isort
 black
 pyTelegramBotAPI
-
