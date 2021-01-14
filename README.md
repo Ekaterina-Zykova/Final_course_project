@@ -18,5 +18,14 @@ python bot_mvp.py
 2. Go to channel settings / users list / promote user to admin
 3. Click SAVE button
 4. Enjoy!
-
-To get more help submit `/help` command to the bot.
+## Bot Commands
+### /start
+Starts the initial dialog with the bot and gets informstion about commands
+### /help
+Starts the initial dialog with the bot and gets informstion about commands
+### /add_channel
+Adds channel in repost list
+### /delete_channel
+Deletes channel in repost list
+### /show_repost_list
+Showes channels in repost list
