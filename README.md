@@ -12,7 +12,7 @@ pip3 install -r requirements.txt
 ```
 ## Start bot
 ```shell
-python bot_mvp.py
+python bot.py
 ```
 1. Add a bot in your channel.
 2. Go to channel settings / users list / promote user to admin
