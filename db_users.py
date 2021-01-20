@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from contextlib import contextmanager
+from typing import List, Optional
 
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -16,7 +17,7 @@ class User(Base):
     user_id = Column(Integer)
     channel = Column(String)
 
-    def __init__(self, user_id, channel):
+    def __init__(self, user_id: int, channel: str) -> None:
         self.user_id = user_id
         self.channel = channel
 
@@ -37,7 +38,7 @@ def session_scope():
         session.close()
 
 
-def check_exist(user, channel=None):
+def check_exist(user: int, channel: Optional[str]) -> List[Optional[str]]:
     with session_scope() as session:
         if channel:
             return [
@@ -51,7 +52,7 @@ def check_exist(user, channel=None):
         ]
 
 
-def add_channel(user, channel):
+def add_channel(user: int, channel: str) -> str:
     with session_scope() as session:
         try:
             if check_exist(user, channel):
@@ -64,7 +65,7 @@ def add_channel(user, channel):
             return "Error"
 
 
-def delete_channel(user, channel):
+def delete_channel(user: int, channel: str) -> str:
     with session_scope() as session:
         try:
             if not check_exist(user, channel):
