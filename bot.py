@@ -1,14 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import config
-from db_users import add_channel, delete_channel, check_exist
 import logging
+
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import (
+    CallbackContext,
+    CommandHandler,
+    Filters,
+    MessageHandler,
+    Updater,
+)
+
+import config
+from db_users import add_channel, check_exist, delete_channel
 
 # Enable logging
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 
 logger = logging.getLogger(__name__)
@@ -16,14 +24,18 @@ logger = logging.getLogger(__name__)
 
 def start_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
-    update.message.reply_text(f"Hello, {update.message.chat.first_name}! It's bot for reposts.")
+    update.message.reply_text(
+        f"Hello, {update.message.chat.first_name}! It's bot for reposts."
+    )
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
-    update.message.reply_text(f"For add channel in channel list, write:\n    /add_channel @name"
-                              f"\nFor delete channel from channel list, write:\n    /delete_channel @name"
-                              f"\nFor show channel list, write:\n    /channel_list")
+    update.message.reply_text(
+        f"For add channel in channel list, write:\n    /add_channel @name"
+        f"\nFor delete channel from channel list, write:\n    /delete_channel @name"
+        f"\nFor show channel list, write:\n    /channel_list"
+    )
 
 
 def add_channel_command(update: Update, context: CallbackContext) -> None:
@@ -39,7 +51,9 @@ def add_channel_command(update: Update, context: CallbackContext) -> None:
 def delete_channel_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /delete_channel is issued."""
     if len(update.message.text.split()) == 1:
-        answer = "For delete channel from channel list, write:\n    /delete_channel @name"
+        answer = (
+            "For delete channel from channel list, write:\n    /delete_channel @name"
+        )
     else:
         channel = update.message.text.split()[1]
         answer = delete_channel(user=update.message.from_user.id, channel=channel)
@@ -65,8 +79,10 @@ def repost_messages(update: Update, context: CallbackContext):
         for channel in channel_list:
             update.message.copy(chat_id=channel)
     else:
-        update.message.reply_text("Channel list is empty 😔 "
-                                  "\nFor add channel in channel list, write:\n    /add_channel @name")
+        update.message.reply_text(
+            "Channel list is empty 😔 "
+            "\nFor add channel in channel list, write:\n    /add_channel @name"
+        )
 
 
 def error(update: Update, context: CallbackContext) -> None:
@@ -101,5 +117,5 @@ def main():
     updater.idle()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///users.db', echo=False)
+engine = create_engine("sqlite:///users.db", echo=False)
 Base = declarative_base()
 
 
@@ -40,8 +40,15 @@ def session_scope():
 def check_exist(user, channel=None):
     with session_scope() as session:
         if channel:
-            return [now.channel for now in session.query(User).filter_by(user_id=user, channel=channel).all()]
-        return [now.channel for now in session.query(User).filter_by(user_id=user).all()]
+            return [
+                now.channel
+                for now in session.query(User)
+                .filter_by(user_id=user, channel=channel)
+                .all()
+            ]
+        return [
+            now.channel for now in session.query(User).filter_by(user_id=user).all()
+        ]
 
 
 def add_channel(user, channel):
@@ -64,6 +71,8 @@ def delete_channel(user, channel):
                 return "The channel does not exist in the list."
             session.query(User).filter_by(user_id=user, channel=channel).delete()
             session.commit()
-            return "Channel is deleted from the list!\nYou can write next name of channel."
+            return (
+                "Channel is deleted from the list!\nYou can write next name of channel."
+            )
         except Exception:
             return "Error"
