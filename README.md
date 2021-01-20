@@ -18,7 +18,6 @@ python bot.py
 2. Go to channel settings / users list / promote user to admin
 3. Click SAVE button
 4. Enjoy!
-
 ## Commands
 ### /start
 Starts the initial dialog with the bot
