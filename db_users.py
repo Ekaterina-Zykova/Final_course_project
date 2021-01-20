@@ -38,7 +38,7 @@ def session_scope():
         session.close()
 
 
-def check_exist(user: int, channel: Optional[str]) -> List[Optional[str]]:
+def check_exist(user: int, channel: Optional[str] = None):
     with session_scope() as session:
         if channel:
             return [
