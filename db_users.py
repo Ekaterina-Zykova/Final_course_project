@@ -54,26 +54,20 @@ def check_exist(user: int, channel: Optional[str] = None):
 
 def add_channel(user: int, channel: str) -> str:
     with session_scope() as session:
-        try:
-            if check_exist(user, channel):
-                return "The channel already exists in repost list."
-            new_user = User(user_id=user, channel=f"{channel}")
-            session.add(new_user)
-            session.commit()
-            return "Done! You can write next name of channel"
-        except Exception:
-            return "Error"
+        if check_exist(user, channel):
+            return "The channel already exists in channel list."
+        new_user = User(user_id=user, channel=f"{channel}")
+        session.add(new_user)
+        session.commit()
+        return "Done! You can write next name of channel."
 
 
 def delete_channel(user: int, channel: str) -> str:
     with session_scope() as session:
-        try:
-            if not check_exist(user, channel):
-                return "The channel does not exist in the list."
-            session.query(User).filter_by(user_id=user, channel=channel).delete()
-            session.commit()
-            return (
-                "Channel is deleted from the list!\nYou can write next name of channel."
-            )
-        except Exception:
-            return "Error"
+        if not check_exist(user, channel):
+            return "The channel does not exist in channel list."
+        session.query(User).filter_by(user_id=user, channel=channel).delete()
+        session.commit()
+        return (
+            "Channel is deleted from channel list!\nYou can write next name of channel."
+        )

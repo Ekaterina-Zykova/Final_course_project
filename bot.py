@@ -24,9 +24,7 @@ logger = logging.getLogger(__name__)
 
 def start_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
-    update.message.reply_text(
-        f"Hello, {update.message.chat.first_name}! It's bot for reposts."
-    )
+    update.message.reply_text("Hello! It's bot for reposts.")
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
