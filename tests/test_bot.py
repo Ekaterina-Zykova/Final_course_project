@@ -1,6 +1,7 @@
+import os
+
 from pytest import mark
 from telethon import TelegramClient
-import os
 
 import config
 
@@ -23,9 +24,9 @@ async def test_help_command(client: TelegramClient):
         await conv.send_message("/help")
         resp = await conv.get_response()
         assert (
-                f"For add channel in channel list, write:\n    /add_channel @name"
-                f"\nFor delete channel from channel list, write:\n    /delete_channel @name"
-                f"\nFor show channel list, write:\n    /channel_list" in resp.raw_text
+            f"For add channel in channel list, write:\n    /add_channel @name"
+            f"\nFor delete channel from channel list, write:\n    /delete_channel @name"
+            f"\nFor show channel list, write:\n    /channel_list" in resp.raw_text
         )
 
 
@@ -34,8 +35,8 @@ async def test_add_channel_command(client: TelegramClient):
         await conv.send_message("/add_channel")
         resp1 = await conv.get_response()
         assert (
-                "For add channel in channel list, write:\n    /add_channel @name"
-                in resp1.raw_text
+            "For add channel in channel list, write:\n    /add_channel @name"
+            in resp1.raw_text
         )
 
         await conv.send_message("/add_channel @channel1")
@@ -52,15 +53,15 @@ async def test_delete_channel_command(client: TelegramClient):
         await conv.send_message("/delete_channel")
         resp1 = await conv.get_response()
         assert (
-                "For delete channel from channel list, write:\n    /delete_channel @name"
-                in resp1.raw_text
+            "For delete channel from channel list, write:\n    /delete_channel @name"
+            in resp1.raw_text
         )
 
         await conv.send_message("/delete_channel @channel1")
         resp2 = await conv.get_response()
         assert (
-                "Channel is deleted from channel list!\nYou can write next name of channel."
-                in resp2.raw_text
+            "Channel is deleted from channel list!\nYou can write next name of channel."
+            in resp2.raw_text
         )
 
         await conv.send_message("/delete_channel @channel1")
@@ -73,8 +74,8 @@ async def test_channel_list_command(client: TelegramClient):
         await conv.send_message("/channel_list")
         resp1 = await conv.get_response()
         assert (
-                "Channel list is empty 😔 \nFor add channel in channel list, write:\n    /add_channel @name"
-                in resp1.raw_text
+            "Channel list is empty 😔 \nFor add channel in channel list, write:\n    /add_channel @name"
+            in resp1.raw_text
         )
 
         await conv.send_message("/add_channel @channel1")
