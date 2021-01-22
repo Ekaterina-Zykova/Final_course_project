@@ -94,4 +94,4 @@ async def test_repost_messages_photo(client: TelegramClient):
         await conv.send_message("It's cat", file=file_path)
         messages = await client.get_messages(config.channel)
         assert "It's cat" in messages[0].message
-        assert messages[0].media.photo.id != 0
+        assert messages[0].media.photo is not None
