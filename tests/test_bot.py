@@ -91,7 +91,7 @@ async def test_repost_messages_photo(client: TelegramClient):
     async with client as client:
         conv = client.conversation(config.bot)
         file_path = os.path.abspath(r"tests\cat.jpeg")
-        await conv.send_message("It's cat", file=file_path)
+        await conv.send_message("It's a cat", file=file_path)
         messages = await client.get_messages(config.channel)
-        assert "It's cat" in messages[0].message
+        assert "It's a cat" in messages[0].message
         assert messages[0].media.photo is not None
