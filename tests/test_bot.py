@@ -90,7 +90,7 @@ async def test_channel_list_command(client: TelegramClient):
 async def test_repost_messages_photo(client: TelegramClient):
     async with client as client:
         conv = client.conversation(config.bot)
-        file_path = os.path.abspath(r"tests\cat.jpeg")
+        file_path = os.path.abspath(r"tests\res\cat.jpeg")
         await conv.send_message("It's a cat", file=file_path)
         message = await client.get_messages(config.channel)
         assert "It's a cat" in message[0].message
@@ -100,7 +100,7 @@ async def test_repost_messages_photo(client: TelegramClient):
 async def test_repost_messages_audio(client: TelegramClient):
     async with client as client:
         conv = client.conversation(config.bot)
-        file_path = os.path.abspath(r"tests\audio.mp3")
+        file_path = os.path.abspath(r"tests\res\audio.mp3")
         await conv.send_file(file_path)
         message = await client.get_messages(config.channel)
         assert message[0].media is not None
@@ -109,7 +109,7 @@ async def test_repost_messages_audio(client: TelegramClient):
 async def test_repost_messages_video(client: TelegramClient):
     async with client as client:
         conv = client.conversation(config.bot)
-        file_path = os.path.abspath(r"tests\video.mp4")
+        file_path = os.path.abspath(r"tests\res\video.mp4")
         await conv.send_file(file_path)
         message = await client.get_messages(config.channel)
         assert message[0].media is not None

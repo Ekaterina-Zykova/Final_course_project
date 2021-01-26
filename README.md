@@ -5,7 +5,20 @@ Telegram bot that accepts incoming messages and repost them on its own behalf to
 git clone https://github.com/enzkva/Final_course_project.git
 ```
 ## Edit
-Edit token in file config.py
+Edit variables in file config.py
+
+    token = ''  # your bot token
+    
+    bot = ''  # your bot name
+    
+    channel = ''  # channel where your bot is an admin
+    
+    api_id = 0123  # api id of your Client API 
+    
+    api_hash = ''  # api hash of your Client API 
+    
+    session_str = ''  # string session of your Client API
+
 ## Installation
 ```shell
 pip3 install -r requirements.txt

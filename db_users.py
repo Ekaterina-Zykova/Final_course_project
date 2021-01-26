@@ -59,7 +59,7 @@ def add_channel(user: int, channel: str) -> str:
         new_user = User(user_id=user, channel=f"{channel}")
         session.add(new_user)
         session.commit()
-        return "Done! You can write next name of channel."
+        return "The channel has been added."
 
 
 def delete_channel(user: int, channel: str) -> str:
